@@ -6,6 +6,7 @@ import { getAllAvatars } from "../../data/getAllAvatars";
 
 export const Register = () => {
   const [avatars, setAvatars] = useState([]);
+  const [selectedAvatar, setSelectedAvatar] = useState(0);
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -110,18 +111,41 @@ export const Register = () => {
               placeholder="Password"
             />
           </fieldset>
-          <fieldset className="mb-4">
-            <label htmlFor="avatarSelection"> Choose One </label>
-            {avatars.map((avatar) => {
-              return (
-                <img
+
+          <fieldset className="mb-4 flex flex-col items-center">
+            <label className="fieldset-label mb-2">Choose One</label>
+            <div className="flex flex-wrap justify-center">
+              {avatars.map((avatar) => (
+                <label
                   key={`avatar ${avatar.id}`}
-                  src={avatar.avatar_url}
-                  alt="witch related characters"
-                />
-              );
-            })}
+                  className="avatar-container basis-30 mb-4 mx-2"
+                >
+                  <img
+                    src={avatar.avatar_url}
+                    alt="witch related characters"
+                    height={200}
+                    width={200}
+                    className="mb-2 border rounded-2xl border-none cursor-pointer"
+                    onClick={(e) => {
+                      e.target.className =
+                        "mb-2 border rounded-2xl cursor-pointer border-emerald-300 border-4";
+                    }}
+                  />
+                  <input
+                    type="radio"
+                    id={`avatar-${avatar.id}`}
+                    name="avatarSelection"
+                    className="hidden"
+                    value={avatar.id}
+                    onChange={(e) => {
+                      setSelectedAvatar(parseInt(e.target.value));
+                    }}
+                  />
+                </label>
+              ))}
+            </div>
           </fieldset>
+
           <fieldset>
             <button
               type="submit"
