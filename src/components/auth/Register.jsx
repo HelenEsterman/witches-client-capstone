@@ -1,8 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { getAllAvatars } from "../../data/getAllAvatars";
-
-// TODO: Component needs A LOT of work!! need to fix save, deal with avatar selection, and avatar mapping
+import { getAllAvatars } from "../../data/avatarData";
 
 export const Register = () => {
   const [avatars, setAvatars] = useState([]);
@@ -11,6 +9,8 @@ export const Register = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [username, setUsername] = useState("");
+  const [nickname, setNickname] = useState("");
+  const [coven, setCoven] = useState("");
   const userExistModal = useRef();
   const navigate = useNavigate();
 
@@ -29,6 +29,9 @@ export const Register = () => {
         first_name: firstName,
         last_name: lastName,
         username,
+        avatar: selectedAvatar,
+        coven,
+        nickname,
       }),
       headers: {
         "Content-Type": "application/json",
@@ -111,9 +114,31 @@ export const Register = () => {
               placeholder="Password"
             />
           </fieldset>
+          <fieldset className="mb-4">
+            <label htmlFor="inputNickname"> Nickname </label>
+            <input
+              type="nickname"
+              id="inputNickname"
+              value={nickname}
+              onChange={(evt) => setNickname(evt.target.value)}
+              className="form-control"
+              placeholder="Nickname"
+            />
+          </fieldset>
+          <fieldset className="mb-4">
+            <label htmlFor="inputCoven"> Coven </label>
+            <input
+              type="coven"
+              id="inputCoven"
+              value={coven}
+              onChange={(evt) => setCoven(evt.target.value)}
+              className="form-control"
+              placeholder="Coven"
+            />
+          </fieldset>
 
           <fieldset className="mb-4 flex flex-col items-center">
-            <label className="fieldset-label mb-2">Choose One</label>
+            <label className="fieldset-label mb-2">Choose an Avatar</label>
             <div className="flex flex-wrap justify-center">
               {avatars.map((avatar) => (
                 <label
@@ -123,23 +148,15 @@ export const Register = () => {
                   <img
                     src={avatar.avatar_url}
                     alt="witch related characters"
+                    id={avatar.id}
                     height={200}
                     width={200}
-                    className="mb-2 border rounded-2xl border-none cursor-pointer"
-                    onClick={(e) => {
-                      e.target.className =
-                        "mb-2 border rounded-2xl cursor-pointer border-emerald-300 border-4";
-                    }}
-                  />
-                  <input
-                    type="radio"
-                    id={`avatar-${avatar.id}`}
-                    name="avatarSelection"
-                    className="hidden"
-                    value={avatar.id}
-                    onChange={(e) => {
-                      setSelectedAvatar(parseInt(e.target.value));
-                    }}
+                    className={
+                      avatar.id === selectedAvatar
+                        ? "mb-2 border rounded-2xl hover:cursor-pointer  border-emerald-300 border-4"
+                        : "mb-2 border rounded-2xl border-none hover:cursor-pointer hover:opacity-60"
+                    }
+                    onClick={(e) => setSelectedAvatar(parseInt(e.target.id))}
                   />
                 </label>
               ))}
