@@ -12,7 +12,7 @@ export const MyIngredients = () => {
   return (
     <div>
       {myIngredients.map((ingredient) => {
-        return <div key={ingredient.id}>{ingredient.label}</div>;
+        return <div key={ingredient.id}>{ingredient.ingredient.label}</div>;
       })}
     </div>
   );

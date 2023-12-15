@@ -18,7 +18,7 @@ export const NavBar = () => {
           className="text-left underline text-blue-600 hover:text-purple-700"
           to={"/my-ingredients"}
         >
-          Ingredients
+          My Ingredients
         </NavLink>
       </li>
       {localStorage.getItem("witches_token") !== null ? (

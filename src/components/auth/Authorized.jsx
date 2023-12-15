@@ -6,9 +6,8 @@ export const Authorized = () => {
     return (
       <>
         <NavBar />
-        <main className="p-4">
-          <Outlet />
-        </main>
+
+        <Outlet />
       </>
     );
   }
