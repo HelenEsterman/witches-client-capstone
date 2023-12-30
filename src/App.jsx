@@ -7,6 +7,7 @@ import { Home } from "./components/Home";
 import { Spells } from "./components/spells/Spells";
 import { MyIngredients } from "./components/ingredients/MyIngredients";
 import { SpellDetails } from "./components/spells/SpellDetails";
+import { AddIngredient } from "./components/ingredients/AddIngredient";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path=":spellId" element={<SpellDetails />} />
         </Route>
         <Route path="/my-ingredients" element={<MyIngredients />} />
+        <Route path="/add-to-inventory" element={<AddIngredient />} />
       </Route>
     </Routes>
   );

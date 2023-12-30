@@ -61,8 +61,11 @@ export const Register = () => {
       </dialog>
 
       <section>
-        <form className="form--login" onSubmit={handleRegister}>
-          <h1 className="text-4xl mt-7 mb-3">{`[witch capstone name TBD]`}</h1>
+        <form
+          className="container-register bg-register h-screen flex flex-col items-center justify-center bg-cover"
+          onSubmit={handleRegister}
+        >
+          <h1 className="text-4xl mt-7 mb-3">Witches Cabinet</h1>
           <h2 className="text-xl mb-10">Register new account</h2>
           <fieldset className="mb-4">
             <label htmlFor="firstName"> First name </label>

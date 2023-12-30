@@ -28,7 +28,7 @@ export const Login = () => {
   };
 
   return (
-    <div className="container--login">
+    <div className="container--login bg-login h-screen flex items-center justify-center bg-cover">
       <dialog className="dialog dialog--auth" ref={userExistModal}>
         <div>User does not exist</div>
         <button
@@ -41,7 +41,7 @@ export const Login = () => {
 
       <section>
         <form className="form--login">
-          <h1 className="text-4xl mt-7 mb-3">{`[witch capstone name TBD]`}</h1>
+          <h1 className="font-custom text-4xl mt-7 mb-3">Witches Cabinet</h1>
           <h2 className="text-xl mb-10">Please sign in</h2>
           <fieldset className="mb-4">
             <label htmlFor="inputEmail"> Email </label>
