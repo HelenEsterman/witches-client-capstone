@@ -21,22 +21,24 @@ export const Spells = () => {
   }, [desiredIntention, spells]);
 
   return (
-    <div>
-      <input
-        onChange={(event) => {
-          setDesiredIntention(event.target.value);
-        }}
-        type="text"
-        placeholder="Search Intention"
-        value={desiredIntention}
-      />
-      {filteredSpells.map((spellObj) => {
-        return (
-          <div key={spellObj.id}>
-            <Link to={`/spells/${spellObj.id}`}>{spellObj.name}</Link>
-          </div>
-        );
-      })}
+    <div className="spellView opacity-layer">
+      <div>
+        <input
+          onChange={(event) => {
+            setDesiredIntention(event.target.value);
+          }}
+          type="text"
+          placeholder="Search Intention"
+          value={desiredIntention}
+        />
+        {filteredSpells.map((spellObj) => {
+          return (
+            <div key={spellObj.id}>
+              <Link to={`/spells/${spellObj.id}`}>{spellObj.name}</Link>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };
