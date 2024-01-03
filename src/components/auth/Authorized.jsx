@@ -1,11 +1,11 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { NavBar } from "../nav/NavBar";
 
-export const Authorized = () => {
+export const Authorized = ({ showNavbar }) => {
   if (localStorage.getItem("witches_token")) {
     return (
       <>
-        <NavBar />
+        {showNavbar && <NavBar />}
 
         <Outlet />
       </>

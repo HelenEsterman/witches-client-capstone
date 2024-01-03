@@ -1,3 +1,73 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.black-text-shadow {
+  text-shadow: 6px 1px 6px rgb(0, 0, 0);
+}
+
+.opacity-layer {
+  width: 100%;
+  height: auto;
+  background: rgba(
+    30,
+    25,
+    25,
+    0.7
+  ); /* Adjust the last value (0.5) to change the transparency */
+}
+
+.purple-box-shadow {
+  box-shadow: 3px 2px 9px rgb(80, 40, 167);
+}
+
+.views {
+  height: 100vh;
+}
+
+.home-choices {
+  position: relative;
+}
+
+.home-choices:hover .home-nav-choices {
+  display: block;
+}
+.home-choices:hover .home-opacity-layer {
+  display: block;
+}
+
+.home-opacity-layer {
+  /* Your existing styles for the opacity layer */
+  width: 100%;
+  height: 85%;
+  background: rgba(
+    30,
+    25,
+    25,
+    0.7
+  ); /* Adjust the last value (0.7) for transparency */
+  display: none; /* Hide by default */
+  position: absolute;
+  z-index: 1; /* Ensure it's above other content */
+}
+
+.home-nav-choices {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 1;
+}
+
+.dialog-css {
+  height: 250px;
+  width: 700px;
+  border-radius: 35px;
+}
+
+.spell-list {
+  font-size: 44px;
+  margin-right: 100rem;
+}
