@@ -57,11 +57,13 @@ export const Register = () => {
 
   return (
     <div className="container--register bg-register bg-cover bg-center">
-      <div className="opacity-layer flex flex-col items-center justify-center">
-        <dialog className="dialog dialog--auth" ref={userExistModal}>
-          <div>User already exists</div>
+      <div className="views opacity-layer flex flex-col items-center justify-center overflow-auto">
+        <dialog className="dialog-css bg-black" ref={userExistModal}>
+          <div className="text-center mt-10 mb-16 font-custom text-emerald-500 black-text-shadow text-4xl">
+            An account with that email already exists.
+          </div>
           <button
-            className="button--close"
+            className="button--close rounded-3xl bg-indigo-950 font-custom w-28 h-10 text-2xl"
             onClick={() => userExistModal.current.close()}
           >
             Close

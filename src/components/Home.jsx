@@ -11,7 +11,7 @@ export const Home = ({ setShowNavbar }) => {
     };
   }, [setShowNavbar]);
   return (
-    <div className="home opacity-layer">
+    <div className="home views opacity-layer">
       <div className="home-nav-bar flex justify-evenly">
         <Link to="/spells" className="home-choices">
           <div className="home-opacity-layer rounded-full mt-20"></div>

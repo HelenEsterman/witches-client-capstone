@@ -54,7 +54,7 @@ export const MyIngredients = () => {
   };
 
   return (
-    <div>
+    <div className="ingredient-view opacity-layer views">
       <dialog
         className="ingredient-edit-modal bg-white p-6 border-2 border-black rounded-lg "
         ref={deleteConfirmationModal}
@@ -190,14 +190,14 @@ export const MyIngredients = () => {
           </div>
         </form>
       </dialog>
-      <div className="entire_ingredient_inventory flex  items-center justify-center mt-10">
+      <div className="entire_ingredient_inventory flex  items-center justify-center bg-black">
         {types.map((typeObj) => {
           const filteredIngredients = myIngredients.filter(
             (ingredient) => ingredient.ingredient.type.id === typeObj.id
           );
           return (
             <div
-              className="ingredients-container border border-emerald-300 m-10"
+              className="ingredients-container border border-emerald-300"
               key={typeObj.id}
             >
               <h1 className="type-header text-3xl text-emerald-300">
@@ -217,26 +217,26 @@ export const MyIngredients = () => {
                         <>
                           {ingredient.quantity} {ingredient?.unit.label} of{" "}
                           {ingredient.ingredient.label}
-                          <button
-                            className="delete_ingredient_button border border-emerald-300 p-3"
-                            onClick={() => {
-                              setDeleteIngredient(ingredient.id);
-                              deleteConfirmationModal.current.showModal();
-                            }}
-                          >
-                            Delete
-                          </button>
-                          <button
-                            className="edit_ingredient_button border border-emerald-300 p-3"
-                            onClick={() => {
-                              setUpdatedIngredient(ingredient);
-                              editIngredientModal.current.showModal();
-                            }}
-                          >
-                            Edit
-                          </button>
                         </>
                       )}
+                      <button
+                        className="delete_ingredient_button border border-emerald-300 p-3"
+                        onClick={() => {
+                          setDeleteIngredient(ingredient.id);
+                          deleteConfirmationModal.current.showModal();
+                        }}
+                      >
+                        Delete
+                      </button>
+                      <button
+                        className="edit_ingredient_button border border-emerald-300 p-3"
+                        onClick={() => {
+                          setUpdatedIngredient(ingredient);
+                          editIngredientModal.current.showModal();
+                        }}
+                      >
+                        Edit
+                      </button>
                     </div>
                   </div>
                 );
@@ -247,7 +247,7 @@ export const MyIngredients = () => {
       </div>
 
       <button
-        className="add_ingredient_button border border-emerald-300 p-3"
+        className="add_ingredient_button border border-emerald-300 p-3 "
         onClick={() => {
           navigate("/add-to-inventory");
         }}

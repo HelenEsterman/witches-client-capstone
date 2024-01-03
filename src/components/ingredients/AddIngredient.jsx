@@ -48,7 +48,7 @@ export const AddIngredient = () => {
   };
 
   return (
-    <div>
+    <div className="bg-black">
       <h1>Add Ingredient</h1>
       <form
         onSubmit={(event) => {

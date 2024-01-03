@@ -14,7 +14,7 @@ export const SpellDetails = () => {
   }, [spellId]);
 
   return (
-    <div className="entire_detail_container flex justify-between">
+    <div className="entire_detail_container flex justify-between bg-black">
       <div className="spell_detail_container max-w-lg ml-36">
         <div className="border border-emerald-300 text-3xl p-10">
           {spell.name}
@@ -25,11 +25,15 @@ export const SpellDetails = () => {
         </div>
         <div className="chant border border-emerald-300 p-10">
           <p className="spell_detail_label text-emerald-300">chant:</p>
-          <p className="italic">{`"${spell.chant}"`}</p>
+          {spell.chant ? (
+            <p className="italic">{'"' + spell.chant + '"'}</p>
+          ) : (
+            <p>no chant</p>
+          )}
         </div>
         <div className="repeat_chant border border-emerald-300 p-10">
           <p className="spell_detail_label text-emerald-300">repeat chant:</p>
-          {spell.repeat_chant} times
+          {spell.repeat_chant ? `${spell.repeat_chant} times` : "no chant"}
         </div>
         <div className="when_most_powerful border border-emerald-300 p-10">
           <p className="spell_detail_label text-emerald-300">

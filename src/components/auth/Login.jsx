@@ -29,11 +29,13 @@ export const Login = () => {
 
   return (
     <div className="container--login bg-login h-screen bg-cover">
-      <div className="opacity-layer flex flex-col items-center justify-center pb-20">
-        <dialog className="dialog dialog--auth" ref={userExistModal}>
-          <div>User does not exist</div>
+      <div className="views opacity-layer flex flex-col items-center justify-center pb-20">
+        <dialog className="dialog-css bg-black" ref={userExistModal}>
+          <div className="text-center mt-10 mb-16 font-custom text-emerald-500 black-text-shadow text-4xl">
+            User does not exist. Confirm email and password are correct.
+          </div>
           <button
-            className="button--close"
+            className="button--close rounded-3xl bg-indigo-950 font-custom w-28 h-10 text-2xl"
             onClick={() => userExistModal.current.close()}
           >
             Close
