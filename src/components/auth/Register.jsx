@@ -71,7 +71,7 @@ export const Register = () => {
         </dialog>
 
         <section>
-          <h1 className="login-header font-custom text-8xl text-emerald-500 black-text-shadow mb-3 mt-6">
+          <h1 className="login-header font-custom text-8xl text-emerald-500 black-text-shadow mb-3 mt-80">
             Witches Cabinet
           </h1>
           <form

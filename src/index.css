@@ -68,6 +68,19 @@
 }
 
 .spell-list {
-  font-size: 44px;
+  font-size: 52px;
   margin-right: 100rem;
+}
+
+.ingredient-bg {
+  height: 40rem;
+  width: 31rem;
+}
+
+.ingredient-div {
+  font-size: 40px;
+}
+
+.black-text-outline {
+  text-shadow: 1px 1px 0px rgb(0, 0, 0);
 }

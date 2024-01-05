@@ -8,8 +8,10 @@ import {
   getCurrentUserIngredients,
 } from "../../data/ingredientData";
 import { useNavigate } from "react-router-dom";
+import { Loading } from "../Loading";
 
-export const MyIngredients = () => {
+export const MyIngredients = ({ setShowNavbar }) => {
+  const [loading, setLoading] = useState(true);
   const [hoveredIngredientId, setHoveredIngredientId] = useState(null);
   const [myIngredients, setMyIngredients] = useState([]);
   const [ingredients, setIngredients] = useState([]);
@@ -39,6 +41,9 @@ export const MyIngredients = () => {
     allIngredientTypes().then((typesArray) => {
       setTypes(typesArray);
     });
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
   }, [updatedIngredient, deleteIngredient]);
 
   const handleInputChanges = (event) => {
@@ -54,206 +59,230 @@ export const MyIngredients = () => {
   };
 
   return (
-    <div className="ingredient-view opacity-layer views">
-      <dialog
-        className="ingredient-edit-modal bg-white p-6 border-2 border-black rounded-lg "
-        ref={deleteConfirmationModal}
-      >
-        <button
-          className="text-xl absolute top-2 right-2 cursor-pointer hover:text-red-500"
-          onClick={() => deleteConfirmationModal.current.close()}
-          //This handles the X button (close button)
-        >
-          X
-        </button>
-        <h1 className="text-xl font-bold text-center mb-4">
-          Are you sure you want to delete this ingredient from your inventory?
-        </h1>
-        <div className="w-full">
-          <button
-            className="btn mt-4 bg-green-200 border-2 border-green-300 rounded-md p-3 w-full font-semibold hover:bg-green-300"
-            onClick={() => {
-              deleteIngredientFromInventory(deleteIngredient).then(() => {
-                setDeleteIngredient("");
-                deleteConfirmationModal.current.close();
-              });
-            }}
+    <>
+      {loading === true ? (
+        <Loading setShowNavbar={setShowNavbar} />
+      ) : (
+        <div className="ingredient-view opacity-layer overflow-auto">
+          <dialog
+            className="ingredient-edit-modal bg-white p-6 border-2 border-black rounded-lg "
+            ref={deleteConfirmationModal}
           >
-            Yes
-          </button>
-          <button
-            className="btn bg-red-200 border-2 border-red-300 rounded-md p-3 w-full mt-2 font-semibold hover:bg-red-300"
-            onClick={() => deleteConfirmationModal.current.close()}
-            //handles the cancel button
+            <button
+              className="text-xl absolute top-2 right-2 cursor-pointer hover:text-red-500"
+              onClick={() => deleteConfirmationModal.current.close()}
+              //This handles the X button (close button)
+            >
+              X
+            </button>
+            <h1 className="text-xl font-bold text-center mb-4">
+              Are you sure you want to delete this ingredient from your
+              inventory?
+            </h1>
+            <div className="w-full">
+              <button
+                className="btn mt-4 bg-green-200 border-2 border-green-300 rounded-md p-3 w-full font-semibold hover:bg-green-300"
+                onClick={() => {
+                  deleteIngredientFromInventory(deleteIngredient).then(() => {
+                    setDeleteIngredient("");
+                    deleteConfirmationModal.current.close();
+                  });
+                }}
+              >
+                Yes
+              </button>
+              <button
+                className="btn bg-red-200 border-2 border-red-300 rounded-md p-3 w-full mt-2 font-semibold hover:bg-red-300"
+                onClick={() => deleteConfirmationModal.current.close()}
+                //handles the cancel button
+              >
+                No
+              </button>
+            </div>
+          </dialog>
+          <dialog
+            className="ingredient-edit-modal bg-white p-6 border-2 border-black rounded-lg "
+            ref={editIngredientModal}
           >
-            No
-          </button>
-        </div>
-      </dialog>
-      <dialog
-        className="ingredient-edit-modal bg-white p-6 border-2 border-black rounded-lg "
-        ref={editIngredientModal}
-      >
-        <button
-          className="text-xl absolute top-2 right-2 cursor-pointer hover:text-red-500"
-          onClick={() => editIngredientModal.current.close()}
-          //This handles the X button (close button)
-        >
-          X
-        </button>
-        <h1 className="text-xl font-bold text-center mb-4">
-          Edit this ingredient
-        </h1>
-        <form
-          className="flex flex-col gap-4 items-center"
-          onSubmit={(event) => {
-            event.preventDefault();
-            // This prevents issues with the form when hitting cancel
-          }}
-        >
-          <fieldset>
-            <label>Ingredients</label>
-            {ingredients.map((ingredient) => (
-              <div key={ingredient.id}>
+            <button
+              className="text-xl absolute top-2 right-2 cursor-pointer hover:text-red-500"
+              onClick={() => editIngredientModal.current.close()}
+              //This handles the X button (close button)
+            >
+              X
+            </button>
+            <h1 className="text-xl font-bold text-center mb-4">
+              Edit this ingredient
+            </h1>
+            <form
+              className="flex flex-col gap-4 items-center"
+              onSubmit={(event) => {
+                event.preventDefault();
+                // This prevents issues with the form when hitting cancel
+              }}
+            >
+              <fieldset>
+                <label>Ingredients</label>
+                {ingredients.map((ingredient) => (
+                  <div key={ingredient.id}>
+                    <input
+                      type="radio"
+                      id={ingredient.id}
+                      name="ingredient"
+                      value={ingredient.id}
+                      checked={
+                        updatedIngredient.ingredient.id === ingredient.id
+                      }
+                      onChange={handleInputChanges}
+                    />
+                    <label htmlFor={ingredient.id}>{ingredient.label}</label>
+                  </div>
+                ))}
+              </fieldset>
+              <fieldset>
+                <label>Quantity</label>
                 <input
-                  type="radio"
-                  id={ingredient.id}
-                  name="ingredient"
-                  value={ingredient.id}
-                  checked={updatedIngredient.ingredient.id === ingredient.id}
+                  type="number"
+                  name="quantity"
+                  value={
+                    updatedIngredient.quantity ? updatedIngredient.quantity : ""
+                  }
                   onChange={handleInputChanges}
                 />
-                <label htmlFor={ingredient.id}>{ingredient.label}</label>
+              </fieldset>
+              <fieldset>
+                <label>Unit</label>
+                <select
+                  name="unit"
+                  value={
+                    updatedIngredient?.unit.id ? updatedIngredient.unit.id : ""
+                  }
+                  onChange={handleInputChanges}
+                >
+                  <option value={0}>select unit</option>
+                  {units.map((unit) => (
+                    <option key={unit.id} value={unit.id}>
+                      {unit.label}
+                    </option>
+                  ))}
+                </select>
+              </fieldset>
+              <div className="w-full">
+                <button
+                  className="btn mt-4 bg-green-200 border-2 border-green-300 rounded-md p-3 w-full font-semibold hover:bg-green-300"
+                  onClick={() => {
+                    const finalIngredientObj = {
+                      ingredient: updatedIngredient.ingredient.id,
+                      quantity: updatedIngredient.quantity,
+                      unit: updatedIngredient.unit.id,
+                    };
+                    editInventoryIngredient(
+                      finalIngredientObj,
+                      updatedIngredient.id
+                    ).then(() => {
+                      setUpdatedIngredient({
+                        quantity: 0,
+                        ingredient: 0,
+                        unit: 0,
+                      });
+                      editIngredientModal.current.close();
+                    });
+                  }}
+                  //handles the Ok button after editing
+                >
+                  Ok
+                </button>
+                <button
+                  className="btn bg-red-200 border-2 border-red-300 rounded-md p-3 w-full mt-2 font-semibold hover:bg-red-300"
+                  onClick={() => editIngredientModal.current.close()}
+                  //handles the cancel button
+                >
+                  Cancel
+                </button>
               </div>
-            ))}
-          </fieldset>
-          <fieldset>
-            <label>Quantity</label>
-            <input
-              type="number"
-              name="quantity"
-              value={
-                updatedIngredient.quantity ? updatedIngredient.quantity : ""
-              }
-              onChange={handleInputChanges}
-            />
-          </fieldset>
-          <fieldset>
-            <label>Unit</label>
-            <select
-              name="unit"
-              value={
-                updatedIngredient?.unit.id ? updatedIngredient.unit.id : ""
-              }
-              onChange={handleInputChanges}
-            >
-              <option value={0}>select unit</option>
-              {units.map((unit) => (
-                <option key={unit.id} value={unit.id}>
-                  {unit.label}
-                </option>
-              ))}
-            </select>
-          </fieldset>
-          <div className="w-full">
-            <button
-              className="btn mt-4 bg-green-200 border-2 border-green-300 rounded-md p-3 w-full font-semibold hover:bg-green-300"
-              onClick={() => {
-                const finalIngredientObj = {
-                  ingredient: updatedIngredient.ingredient.id,
-                  quantity: updatedIngredient.quantity,
-                  unit: updatedIngredient.unit.id,
-                };
-                editInventoryIngredient(
-                  finalIngredientObj,
-                  updatedIngredient.id
-                ).then(() => {
-                  setUpdatedIngredient({
-                    quantity: 0,
-                    ingredient: 0,
-                    unit: 0,
-                  });
-                  editIngredientModal.current.close();
-                });
-              }}
-              //handles the Ok button after editing
-            >
-              Ok
-            </button>
-            <button
-              className="btn bg-red-200 border-2 border-red-300 rounded-md p-3 w-full mt-2 font-semibold hover:bg-red-300"
-              onClick={() => editIngredientModal.current.close()}
-              //handles the cancel button
-            >
-              Cancel
-            </button>
-          </div>
-        </form>
-      </dialog>
-      <div className="entire_ingredient_inventory flex  items-center justify-center bg-black">
-        {types.map((typeObj) => {
-          const filteredIngredients = myIngredients.filter(
-            (ingredient) => ingredient.ingredient.type.id === typeObj.id
-          );
-          return (
-            <div
-              className="ingredients-container border border-emerald-300"
-              key={typeObj.id}
-            >
-              <h1 className="type-header text-3xl text-emerald-300">
-                {typeObj.label}
-              </h1>
-              {filteredIngredients.map((ingredient) => {
-                return (
-                  <div key={ingredient.id}>
-                    <div
-                      onMouseEnter={() => setHoveredIngredientId(ingredient.id)}
-                      onMouseLeave={() => setHoveredIngredientId(null)}
-                      className="individual-ingredient border border-emerald-300 h-24 w-52"
-                    >
-                      {hoveredIngredientId === ingredient.id ? (
-                        <span>{ingredient.ingredient.healing_property}</span>
-                      ) : (
-                        <>
-                          {ingredient.quantity} {ingredient?.unit.label} of{" "}
-                          {ingredient.ingredient.label}
-                        </>
-                      )}
-                      <button
-                        className="delete_ingredient_button border border-emerald-300 p-3"
-                        onClick={() => {
-                          setDeleteIngredient(ingredient.id);
-                          deleteConfirmationModal.current.showModal();
-                        }}
+            </form>
+          </dialog>
+          <h1 className="mb-10 font-custom text-4xl text-white">
+            Hover over ingredients to see their healing properties!
+          </h1>
+          <div className="entire_ingredient_inventory flex flex-wrap">
+            {types.map((typeObj) => {
+              const filteredIngredients = myIngredients.filter(
+                (ingredient) => ingredient.ingredient.type.id === typeObj.id
+              );
+              return (
+                <div
+                  key={typeObj.id}
+                  className="relative ingredients-container"
+                >
+                  <h1 className="type-header font-custom text-6xl text-indigo-400 font-semibold black-text-shadow">
+                    {typeObj.label}
+                  </h1>
+                  <img
+                    src="https://images.rawpixel.com/image_transparent_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTA4L3Jhd3BpeGVsX29mZmljZV8zNV8zZF9pbGx1c3RyYXRpb25fb2ZfYV9tYWdpY19wb3Rpb25faWNvbl9tYXR0ZV9lNzA5M2Q2MS1mNDEwLTQyNjYtYTZjMy0wMWM1M2RhNzMwM2IucG5n.png"
+                    alt="potion"
+                    className="ingredient-bg opacity-70"
+                  />
+                  <div className="ingredient-div absolute top-0 left-0 right-0 bottom-0 flex flex-col items-center justify-center text-emerald-500 black-text-outline font-bold font-custom z-2 mt-32">
+                    {filteredIngredients.map((ingredient) => (
+                      <div
+                        key={ingredient.id}
+                        className="individual-ingredient-div"
                       >
-                        Delete
-                      </button>
-                      <button
-                        className="edit_ingredient_button border border-emerald-300 p-3"
-                        onClick={() => {
-                          setUpdatedIngredient(ingredient);
-                          editIngredientModal.current.showModal();
-                        }}
-                      >
-                        Edit
-                      </button>
-                    </div>
+                        <div
+                          onMouseEnter={() =>
+                            setHoveredIngredientId(ingredient.id)
+                          }
+                          onMouseLeave={() => setHoveredIngredientId(null)}
+                          className="individual-ingredient"
+                        >
+                          {hoveredIngredientId === ingredient.id ? (
+                            <span>
+                              {ingredient.ingredient.healing_property}
+                            </span>
+                          ) : (
+                            <>
+                              {ingredient.quantity} {ingredient?.unit.label} of{" "}
+                              {ingredient.ingredient.label}
+                            </>
+                          )}
+                          <button
+                            className="delete_ingredient_button p-3 black-text-outline"
+                            onClick={() => {
+                              setDeleteIngredient(ingredient.id);
+                              deleteConfirmationModal.current.showModal();
+                            }}
+                          >
+                            <i className="fa-regular fa-trash-can"></i>
+                          </button>
+                          <button
+                            className="edit_ingredient_button p-3 black-text-outline"
+                            onClick={() => {
+                              setUpdatedIngredient(ingredient);
+                              editIngredientModal.current.showModal();
+                            }}
+                          >
+                            <i className="fa-regular fa-pen-to-square"></i>
+                          </button>
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                );
-              })}
-            </div>
-          );
-        })}
-      </div>
+                </div>
+              );
+            })}
+          </div>
 
-      <button
-        className="add_ingredient_button border border-emerald-300 p-3 "
-        onClick={() => {
-          navigate("/add-to-inventory");
-        }}
-      >
-        Add Ingredient
-      </button>
-    </div>
+          <button
+            className="add_ingredient_button border border-emerald-300 p-3 "
+            onClick={() => {
+              navigate("/add-to-inventory");
+            }}
+          >
+            Add Ingredient
+          </button>
+        </div>
+      )}
+    </>
   );
 };
