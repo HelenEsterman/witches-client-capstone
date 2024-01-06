@@ -9,12 +9,14 @@ import {
 } from "../../data/ingredientData";
 import { useNavigate } from "react-router-dom";
 import { Loading } from "../Loading";
+import Select from "react-select";
 
 export const MyIngredients = ({ setShowNavbar }) => {
   const [loading, setLoading] = useState(true);
   const [hoveredIngredientId, setHoveredIngredientId] = useState(null);
   const [myIngredients, setMyIngredients] = useState([]);
   const [ingredients, setIngredients] = useState([]);
+  const [ingredientSelectChoices, setIngredientSelectChoices] = useState();
   const [deleteIngredient, setDeleteIngredient] = useState("");
   const [units, setUnits] = useState([]);
   const [types, setTypes] = useState([]);
@@ -41,6 +43,12 @@ export const MyIngredients = ({ setShowNavbar }) => {
     allIngredientTypes().then((typesArray) => {
       setTypes(typesArray);
     });
+    const ingredientOptions = ingredients.map((ingredient) => ({
+      label: ingredient.label,
+      value: ingredient.id,
+      target: { name: "ingredient", value: ingredient.id },
+    }));
+    setIngredientSelectChoices(ingredientOptions);
     setTimeout(() => {
       setLoading(false);
     }, 1000);
@@ -48,9 +56,13 @@ export const MyIngredients = ({ setShowNavbar }) => {
 
   const handleInputChanges = (event) => {
     const updatedIngredientCopy = { ...updatedIngredient };
-    if (event.target.name === "ingredient" || event.target.name === "unit") {
+    if (event.target.name === "unit") {
       updatedIngredientCopy[event.target.name] = {
         id: parseInt(event.target.value),
+      };
+    } else if (event.target.name === "ingredient") {
+      updatedIngredientCopy[event.target.name] = {
+        id: event.target.value,
       };
     } else {
       updatedIngredientCopy[event.target.name] = parseInt(event.target.value);
@@ -64,24 +76,21 @@ export const MyIngredients = ({ setShowNavbar }) => {
         <Loading setShowNavbar={setShowNavbar} />
       ) : (
         <div className="ingredient-view opacity-layer overflow-auto">
-          <dialog
-            className="ingredient-edit-modal bg-white p-6 border-2 border-black rounded-lg "
-            ref={deleteConfirmationModal}
-          >
+          <dialog className="dialog-css bg-black" ref={deleteConfirmationModal}>
             <button
-              className="text-xl absolute top-2 right-2 cursor-pointer hover:text-red-500"
+              className="text-xl absolute top-2 right-10 cursor-pointer hover:text-indigo-400"
               onClick={() => deleteConfirmationModal.current.close()}
               //This handles the X button (close button)
             >
               X
             </button>
-            <h1 className="text-xl font-bold text-center mb-4">
+            <h1 className="text-center mt-10 mb-8 font-custom text-emerald-500 black-text-shadow text-4xl">
               Are you sure you want to delete this ingredient from your
               inventory?
             </h1>
-            <div className="w-full">
+            <div className="w-full flex flex-col items-center">
               <button
-                className="btn mt-4 bg-green-200 border-2 border-green-300 rounded-md p-3 w-full font-semibold hover:bg-green-300"
+                className="btn bg-emerald-900 border-2 border-emerald-300 rounded-3xl hover:bg-emerald-300 font-custom h-11 w-20 text-2xl"
                 onClick={() => {
                   deleteIngredientFromInventory(deleteIngredient).then(() => {
                     setDeleteIngredient("");
@@ -92,7 +101,7 @@ export const MyIngredients = ({ setShowNavbar }) => {
                 Yes
               </button>
               <button
-                className="btn bg-red-200 border-2 border-red-300 rounded-md p-3 w-full mt-2 font-semibold hover:bg-red-300"
+                className="btn bg-red-200 border-2 border-red-300 rounded-3xl font-custom h-11 w-20 text-2xl hover:bg-red-300 mt-4"
                 onClick={() => deleteConfirmationModal.current.close()}
                 //handles the cancel button
               >
@@ -101,7 +110,7 @@ export const MyIngredients = ({ setShowNavbar }) => {
             </div>
           </dialog>
           <dialog
-            className="ingredient-edit-modal bg-white p-6 border-2 border-black rounded-lg "
+            className="ingredient-edit-modal bg-black rounded-3xl "
             ref={editIngredientModal}
           >
             <button
@@ -123,21 +132,18 @@ export const MyIngredients = ({ setShowNavbar }) => {
             >
               <fieldset>
                 <label>Ingredients</label>
-                {ingredients.map((ingredient) => (
-                  <div key={ingredient.id}>
-                    <input
-                      type="radio"
-                      id={ingredient.id}
-                      name="ingredient"
-                      value={ingredient.id}
-                      checked={
-                        updatedIngredient.ingredient.id === ingredient.id
-                      }
-                      onChange={handleInputChanges}
-                    />
-                    <label htmlFor={ingredient.id}>{ingredient.label}</label>
-                  </div>
-                ))}
+                <Select
+                  options={ingredientSelectChoices}
+                  onChange={handleInputChanges}
+                  value={{
+                    label: updatedIngredient?.ingredient.label
+                      ? updatedIngredient.ingredient.label
+                      : "",
+                    value: updatedIngredient?.ingredient.id
+                      ? updatedIngredient.ingredient.id
+                      : "",
+                  }}
+                />
               </fieldset>
               <fieldset>
                 <label>Quantity</label>
@@ -159,7 +165,6 @@ export const MyIngredients = ({ setShowNavbar }) => {
                   }
                   onChange={handleInputChanges}
                 >
-                  <option value={0}>select unit</option>
                   {units.map((unit) => (
                     <option key={unit.id} value={unit.id}>
                       {unit.label}
@@ -274,7 +279,7 @@ export const MyIngredients = ({ setShowNavbar }) => {
           </div>
 
           <button
-            className="add_ingredient_button border border-emerald-300 p-3 "
+            className="add_ingredient_button font-custom text-3xl text-white bg-emerald-900 purple-box-shadow p-3 rounded-3xl mb-14 hover:bg-emerald-300"
             onClick={() => {
               navigate("/add-to-inventory");
             }}
