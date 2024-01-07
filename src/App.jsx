@@ -19,11 +19,20 @@ function App() {
       <Route element={<Authorized showNavbar={showNavbar} />}>
         <Route path="/" element={<Home setShowNavbar={setShowNavbar} />} />
         <Route path="/spells">
-          <Route index element={<Spells />} />
-          <Route path=":spellId" element={<SpellDetails />} />
+          <Route index element={<Spells setShowNavbar={setShowNavbar} />} />
+          <Route
+            path=":spellId"
+            element={<SpellDetails setShowNavbar={setShowNavbar} />}
+          />
         </Route>
-        <Route path="/my-ingredients" element={<MyIngredients />} />
-        <Route path="/add-to-inventory" element={<AddIngredient />} />
+        <Route
+          path="/my-ingredients"
+          element={<MyIngredients setShowNavbar={setShowNavbar} />}
+        />
+        <Route
+          path="/add-to-inventory"
+          element={<AddIngredient setShowNavbar={setShowNavbar} />}
+        />
       </Route>
     </Routes>
   );

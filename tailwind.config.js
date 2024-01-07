@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        custom: ["Lavishly Yours", "sans-serif"],
+        custom: ["Tangerine", "sans-serif"],
       },
       backgroundImage: {
         register:

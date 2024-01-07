@@ -63,7 +63,7 @@ export const Register = () => {
             An account with that email already exists.
           </div>
           <button
-            className="button--close rounded-3xl bg-indigo-950 font-custom w-28 h-10 text-2xl"
+            className="button--close rounded-3xl bg-indigo-950 font-custom w-28 h-10 text-2xl hover:bg-indigo-500"
             onClick={() => userExistModal.current.close()}
           >
             Close
@@ -71,7 +71,7 @@ export const Register = () => {
         </dialog>
 
         <section>
-          <h1 className="login-header font-custom text-8xl text-emerald-500 black-text-shadow mb-3 mt-6">
+          <h1 className="login-header font-custom text-8xl text-emerald-500 black-text-shadow mb-3 mt-80">
             Witches Cabinet
           </h1>
           <form
@@ -82,10 +82,10 @@ export const Register = () => {
               Register new account
             </h2>
             <div className="input-container">
-              <fieldset className="mb-4 font-custom text-xl">
+              <fieldset className="mb-4 font-custom text-2xl">
                 <label
                   htmlFor="firstName"
-                  className="email-label mr-6 text-2xl text-white"
+                  className="email-label mr-6 text-white"
                 >
                   First name
                 </label>
@@ -100,10 +100,10 @@ export const Register = () => {
                   autoFocus
                 />
               </fieldset>
-              <fieldset className="mb-4 font-custom text-xl">
+              <fieldset className="mb-4 font-custom text-2xl">
                 <label
                   htmlFor="lastName"
-                  className="email-label mr-6 text-2xl text-white"
+                  className="email-label mr-6 text-white"
                 >
                   Last name
                 </label>
@@ -118,10 +118,10 @@ export const Register = () => {
                   autoFocus
                 />
               </fieldset>
-              <fieldset className="mb-4 font-custom text-xl">
+              <fieldset className="mb-4 font-custom text-2xl">
                 <label
                   htmlFor="inputEmail"
-                  className="email-label mr-6 text-2xl text-white"
+                  className="email-label mr-6 text-white"
                 >
                   Email
                 </label>
@@ -136,10 +136,10 @@ export const Register = () => {
                   autoFocus
                 />
               </fieldset>
-              <fieldset className="mb-4 font-custom text-xl">
+              <fieldset className="mb-4 font-custom text-2xl">
                 <label
                   htmlFor="inputPassword"
-                  className="email-label mr-6 text-2xl text-white"
+                  className="email-label mr-6 text-white"
                 >
                   Password
                 </label>
@@ -152,10 +152,10 @@ export const Register = () => {
                   placeholder="Password"
                 />
               </fieldset>
-              <fieldset className="mb-4 font-custom text-xl">
+              <fieldset className="mb-4 font-custom text-2xl">
                 <label
                   htmlFor="inputVerifyPassword"
-                  className="email-label mr-6 text-2xl text-white"
+                  className="email-label mr-6 text-white"
                 >
                   Verify Password
                 </label>
@@ -168,10 +168,10 @@ export const Register = () => {
                   placeholder="Verify Password"
                 />
               </fieldset>
-              <fieldset className="mb-4 font-custom text-xl">
+              <fieldset className="mb-4 font-custom text-2xl">
                 <label
                   htmlFor="inputNickname"
-                  className="email-label mr-6 text-2xl text-white"
+                  className="email-label mr-6 text-white"
                 >
                   Nickname
                 </label>
@@ -184,10 +184,10 @@ export const Register = () => {
                   placeholder="Nickname"
                 />
               </fieldset>
-              <fieldset className="mb-4 font-custom text-xl">
+              <fieldset className="mb-4 font-custom text-2xl">
                 <label
                   htmlFor="inputCoven"
-                  className="email-label mr-6 text-2xl text-white"
+                  className="email-label mr-6 text-white"
                 >
                   Coven
                 </label>
@@ -202,7 +202,7 @@ export const Register = () => {
               </fieldset>
 
               <fieldset className="mb-4 flex flex-col items-center">
-                <label className="fieldset-label mb-2 font-custom text-3xl">
+                <label className="fieldset-label mb-2 font-custom text-4xl">
                   Choose an Avatar
                 </label>
                 <div className="flex justify-center space-x-2">
@@ -235,7 +235,7 @@ export const Register = () => {
             <fieldset>
               <button
                 type="submit"
-                className="button pb-5 rounded-3xl bg-indigo-950 font-custom text-2xl w-28 h-10 mb-10"
+                className="button pb-5 rounded-3xl bg-indigo-950 font-custom text-2xl w-28 h-10 mb-10 hover:bg-indigo-500"
               >
                 Register
               </button>
@@ -245,7 +245,7 @@ export const Register = () => {
         <div className="loginLinks mb-14">
           <section className="link--register">
             <Link
-              className="underline text-white hover:text-emerald-500 visited:text-indigo-400 font-custom text-3xl "
+              className="underline text-white hover:text-emerald-500 visited:text-indigo-400 font-custom text-4xl "
               to="/login"
             >
               Already have an account?

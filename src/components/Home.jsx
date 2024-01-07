@@ -38,7 +38,7 @@ export const Home = ({ setShowNavbar }) => {
       </div>
       <div className="home-logout-button-div">
         {localStorage.getItem("witches_token") !== null ? (
-          <div className="home-logout absolute top-0 right-36 m-4">
+          <div className="home-logout absolute top-0 right-28 m-4">
             <button
               className="underline text-emerald-500 hover:text-indigo-400"
               onClick={() => {

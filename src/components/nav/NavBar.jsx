@@ -27,7 +27,7 @@ export const NavBar = () => {
         <li className="navbar-item font-custom">
           <Link to={"/spells"}>
             <div className="nav-bar-opacity-layer rounded-full"></div>
-            <div className="navbar-link text-white">Spells</div>
+            <div className="navbar-link text-white text-xl">Spells</div>
             <img
               src="https://images.nightcafe.studio/jobs/52gDVHFNtqNSTNzEXp6G/52gDVHFNtqNSTNzEXp6G--1--l0sa8.jpg?tr=w-1600,c-at_max"
               alt="witch reading spell book with magic emanating from hand"
@@ -38,7 +38,7 @@ export const NavBar = () => {
         <li className="navbar-item font-custom">
           <Link to={"/my-ingredients"}>
             <div className="nav-bar-opacity-layer rounded-full"></div>
-            <div className="navbar-link text-white">My Ingredients</div>
+            <div className="navbar-link text-white text-xl">My Ingredients</div>
             <img
               src="https://images.nightcafe.studio/jobs/xGmPHuGQAb604djmdupn/xGmPHuGQAb604djmdupn--1--fab4f.jpg?tr=w-1600,c-at_max"
               alt="magical forest with a shelf full of bottles and vials of ingredients"
@@ -49,7 +49,7 @@ export const NavBar = () => {
         <li className="navbar-item font-custom">
           <Link to={"/"}>
             <div className="nav-bar-opacity-layer rounded-full"></div>
-            <div className="navbar-link text-white">Home</div>
+            <div className="navbar-link text-white text-xl">Home</div>
             <img
               src="https://images.nightcafe.studio/jobs/qWIHjteC3ljXqdTbFnhy/qWIHjteC3ljXqdTbFnhy--1--karo4.jpg?tr=w-1600,c-at_max"
               alt="witch home"

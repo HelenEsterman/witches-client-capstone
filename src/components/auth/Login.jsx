@@ -35,7 +35,7 @@ export const Login = () => {
             User does not exist. Confirm email and password are correct.
           </div>
           <button
-            className="button--close rounded-3xl bg-indigo-950 font-custom w-28 h-10 text-2xl"
+            className="button--close rounded-3xl bg-indigo-950 hover:bg-indigo-500 font-custom w-28 h-10 text-2xl"
             onClick={() => userExistModal.current.close()}
           >
             Close
@@ -47,13 +47,13 @@ export const Login = () => {
             Witches Cabinet
           </h1>
           <form className="form--login max-w-md mx-auto text-center">
-            <h2 className="sign-in-input text-4xl mb-10 font-custom  text-white black-text-shadow">
+            <h2 className="sign-in-input text-5xl mb-10 font-custom  text-white black-text-shadow">
               Please sign in
             </h2>
-            <fieldset className="email-fieldset mb-4 font-custom text-xl ">
+            <fieldset className="email-fieldset mb-4 font-custom text-2xl ">
               <label
                 htmlFor="inputEmail"
-                className="email-label mr-6 text-2xl text-white"
+                className="email-label mr-6 text-white"
               >
                 {" "}
                 Email{" "}
@@ -69,10 +69,10 @@ export const Login = () => {
                 placeholder="example@email.com"
               />
             </fieldset>
-            <fieldset className="mb-20 font-custom text-xl">
+            <fieldset className="mb-20 font-custom text-2xl">
               <label
                 htmlFor="inputPassword"
-                className="email-label mr-6 text-2xl text-white"
+                className="email-label mr-6 text-white"
               >
                 {" "}
                 Password{" "}
@@ -91,7 +91,7 @@ export const Login = () => {
             <fieldset>
               <button
                 type="submit"
-                className="button pb-5 rounded-3xl bg-indigo-950 font-custom text-2xl w-28 h-10 mb-10"
+                className="button pb-5 rounded-3xl bg-indigo-950 font-custom text-2xl w-28 h-10 mb-10 hover:bg-indigo-500"
                 onClick={handleSignIn}
               >
                 Sign in
@@ -102,7 +102,7 @@ export const Login = () => {
         <div className="loginLinks">
           <section className="link--register">
             <Link
-              className="underline text-white hover:text-emerald-500 visited:text-indigo-400 font-custom text-3xl"
+              className="underline text-white hover:text-emerald-500 visited:text-indigo-400 font-custom text-4xl"
               to="/register"
             >
               Not a member yet?
