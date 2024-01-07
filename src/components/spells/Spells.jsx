@@ -46,7 +46,7 @@ export const Spells = ({ setShowNavbar }) => {
                   />
                 </div>
                 <div
-                  className="spell-list grid grid-cols-2 gap-y-8 font-custom font-semibold text-emerald-500"
+                  className="spell-list grid grid-cols-2 gap-y-8 font-custom font-semibold text-emerald-500 black-text-outline"
                   style={{ columnGap: "41rem" }}
                 >
                   {filteredSpells.map((spellObj) => {

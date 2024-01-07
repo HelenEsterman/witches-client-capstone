@@ -10,7 +10,7 @@ export const Loading = ({ setShowNavbar }) => {
   }, [setShowNavbar]);
 
   return (
-    <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 text-center w-full">
+    <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 text-center w-screen h-screen">
       <p className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10 font-custom text-emerald-500 text-9xl">
         Loading...
       </p>

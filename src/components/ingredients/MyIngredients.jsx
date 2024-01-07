@@ -43,16 +43,19 @@ export const MyIngredients = ({ setShowNavbar }) => {
     allIngredientTypes().then((typesArray) => {
       setTypes(typesArray);
     });
-    const ingredientOptions = ingredients.map((ingredient) => ({
-      label: ingredient.label,
-      value: ingredient.id,
-      target: { name: "ingredient", value: ingredient.id },
-    }));
-    setIngredientSelectChoices(ingredientOptions);
     setTimeout(() => {
       setLoading(false);
     }, 1000);
   }, [updatedIngredient, deleteIngredient]);
+
+  useEffect(() => {
+    const ingredientOptions = ingredients?.map((ingredient) => ({
+      label: ingredient.label,
+      value: ingredient.id,
+      target: { name: "ingredient" },
+    }));
+    setIngredientSelectChoices(ingredientOptions);
+  }, [ingredients]);
 
   const handleInputChanges = (event) => {
     const updatedIngredientCopy = { ...updatedIngredient };
@@ -62,7 +65,8 @@ export const MyIngredients = ({ setShowNavbar }) => {
       };
     } else if (event.target.name === "ingredient") {
       updatedIngredientCopy[event.target.name] = {
-        id: event.target.value,
+        label: event.label,
+        value: event.value,
       };
     } else {
       updatedIngredientCopy[event.target.name] = parseInt(event.target.value);
@@ -110,17 +114,17 @@ export const MyIngredients = ({ setShowNavbar }) => {
             </div>
           </dialog>
           <dialog
-            className="ingredient-edit-modal bg-black rounded-3xl "
+            className="ingredient-edit-modal edit-dialog-css bg-black "
             ref={editIngredientModal}
           >
             <button
-              className="text-xl absolute top-2 right-2 cursor-pointer hover:text-red-500"
+              className="text-xl absolute top-2 right-10 cursor-pointer hover:text-indigo-400"
               onClick={() => editIngredientModal.current.close()}
               //This handles the X button (close button)
             >
               X
             </button>
-            <h1 className="text-xl font-bold text-center mb-4">
+            <h1 className="text-center mt-8 mb-3 font-custom text-emerald-500 black-text-shadow text-6xl">
               Edit this ingredient
             </h1>
             <form
@@ -130,24 +134,22 @@ export const MyIngredients = ({ setShowNavbar }) => {
                 // This prevents issues with the form when hitting cancel
               }}
             >
-              <fieldset>
-                <label>Ingredients</label>
+              <fieldset className="flex font-custom text-white text-3xl">
+                <label>Ingredient</label>
                 <Select
+                  className="ml-6 w-48"
                   options={ingredientSelectChoices}
                   onChange={handleInputChanges}
                   value={{
-                    label: updatedIngredient?.ingredient.label
-                      ? updatedIngredient.ingredient.label
-                      : "",
-                    value: updatedIngredient?.ingredient.id
-                      ? updatedIngredient.ingredient.id
-                      : "",
+                    label: updatedIngredient?.ingredient.label,
+                    value: updatedIngredient?.ingredient.id,
                   }}
                 />
               </fieldset>
-              <fieldset>
-                <label>Quantity</label>
+              <fieldset className="text-white">
+                <label className="font-custom text-3xl">Quantity</label>
                 <input
+                  className="ml-6 rounded-xl opacity-70 text-center border border-2 border-black"
                   type="number"
                   name="quantity"
                   value={
@@ -156,9 +158,10 @@ export const MyIngredients = ({ setShowNavbar }) => {
                   onChange={handleInputChanges}
                 />
               </fieldset>
-              <fieldset>
-                <label>Unit</label>
+              <fieldset className="text-white font-custom ">
+                <label className="text-3xl">Unit</label>
                 <select
+                  className="ml-6 rounded-xl opacity-70 text-center border border-2 border-black text-3xl"
                   name="unit"
                   value={
                     updatedIngredient?.unit.id ? updatedIngredient.unit.id : ""
@@ -172,12 +175,12 @@ export const MyIngredients = ({ setShowNavbar }) => {
                   ))}
                 </select>
               </fieldset>
-              <div className="w-full">
+              <div className="w-full flex flex-col items-center">
                 <button
-                  className="btn mt-4 bg-green-200 border-2 border-green-300 rounded-md p-3 w-full font-semibold hover:bg-green-300"
+                  className="btn bg-emerald-900 border-2 border-emerald-300 rounded-3xl hover:bg-emerald-300 font-custom h-11 w-20 text-2xl"
                   onClick={() => {
                     const finalIngredientObj = {
-                      ingredient: updatedIngredient.ingredient.id,
+                      ingredient: updatedIngredient.ingredient.value,
                       quantity: updatedIngredient.quantity,
                       unit: updatedIngredient.unit.id,
                     };
@@ -198,7 +201,7 @@ export const MyIngredients = ({ setShowNavbar }) => {
                   Ok
                 </button>
                 <button
-                  className="btn bg-red-200 border-2 border-red-300 rounded-md p-3 w-full mt-2 font-semibold hover:bg-red-300"
+                  className="btn bg-red-200 border-2 border-red-300 rounded-3xl font-custom h-11 w-20 text-2xl hover:bg-red-300 mt-4"
                   onClick={() => editIngredientModal.current.close()}
                   //handles the cancel button
                 >
@@ -279,7 +282,7 @@ export const MyIngredients = ({ setShowNavbar }) => {
           </div>
 
           <button
-            className="add_ingredient_button font-custom text-3xl text-white bg-emerald-900 purple-box-shadow p-3 rounded-3xl mb-14 hover:bg-emerald-300"
+            className="add_ingredient_button font-custom text-3xl text-white bg-emerald-900 purple-box-shadow p-3 rounded-3xl mb-14 hover:bg-emerald-300 border border-2 border-black"
             onClick={() => {
               navigate("/add-to-inventory");
             }}
