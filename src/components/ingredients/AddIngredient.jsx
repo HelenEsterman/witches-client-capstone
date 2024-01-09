@@ -70,7 +70,7 @@ export const AddIngredient = ({ setShowNavbar }) => {
           >
             <div className="flex justify-around">
               <fieldset className="font-custom text-3xl">
-                <label className="mr-6">Quantity</label>
+                <label className="mr-6">Quantity *</label>
                 <input
                   type="number"
                   name="quantity"
@@ -80,7 +80,7 @@ export const AddIngredient = ({ setShowNavbar }) => {
                 />
               </fieldset>
               <fieldset className="font-custom text-3xl">
-                <label className="mr-6">Unit</label>
+                <label className="mr-6">Unit *</label>
                 <select
                   name="unit"
                   value={inventoryIngredient.unit}
