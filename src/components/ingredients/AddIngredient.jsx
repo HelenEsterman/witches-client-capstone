@@ -21,7 +21,10 @@ export const AddIngredient = ({ setShowNavbar }) => {
 
   useEffect(() => {
     getAllIngredients().then((ingredientArray) => {
-      setIngredients(ingredientArray);
+      const alphaIngredientsArray = ingredientArray.sort((a, b) =>
+        a.label.localeCompare(b.label)
+      );
+      setIngredients(alphaIngredientsArray);
     });
     getAllUnits().then((unitArray) => {
       setUnits(unitArray);

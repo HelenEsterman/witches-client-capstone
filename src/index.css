@@ -19,7 +19,7 @@
 
 .detail-opacity-layer {
   width: 100%;
-  height: 200%;
+  height: 340%;
   background: rgba(
     30,
     25,
@@ -92,8 +92,8 @@
 }
 
 .ingredient-bg {
-  height: 40rem;
-  width: 31rem;
+  height: 47rem;
+  width: 31.6rem;
 }
 
 .ingredient-div {

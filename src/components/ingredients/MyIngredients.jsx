@@ -180,7 +180,9 @@ export const MyIngredients = ({ setShowNavbar }) => {
                   className="btn bg-emerald-900 border-2 border-emerald-300 rounded-3xl hover:bg-emerald-300 font-custom h-11 w-20 text-2xl"
                   onClick={() => {
                     const finalIngredientObj = {
-                      ingredient: updatedIngredient.ingredient.value,
+                      ingredient: updatedIngredient.ingredient.value
+                        ? updatedIngredient.ingredient.value
+                        : updatedIngredient.ingredient.id,
                       quantity: updatedIngredient.quantity,
                       unit: updatedIngredient.unit.id,
                     };
@@ -231,7 +233,7 @@ export const MyIngredients = ({ setShowNavbar }) => {
                     alt="potion"
                     className="ingredient-bg opacity-70"
                   />
-                  <div className="ingredient-div absolute top-0 left-0 right-0 bottom-0 flex flex-col items-center justify-center text-emerald-500 black-text-outline font-bold font-custom z-2 mt-32">
+                  <div className="ingredient-div absolute top-0 left-0 right-0 bottom-0 flex flex-col items-center justify-center text-emerald-500 black-text-outline font-bold font-custom z-2 mt-64">
                     {filteredIngredients.map((ingredient) => (
                       <div
                         key={ingredient.id}
