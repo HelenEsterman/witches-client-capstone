@@ -87,7 +87,7 @@ export const Register = () => {
                   htmlFor="firstName"
                   className="email-label mr-6 text-white"
                 >
-                  First name
+                  First name *
                 </label>
                 <input
                   type="text"
@@ -105,7 +105,7 @@ export const Register = () => {
                   htmlFor="lastName"
                   className="email-label mr-6 text-white"
                 >
-                  Last name
+                  Last name *
                 </label>
                 <input
                   type="text"
@@ -123,7 +123,7 @@ export const Register = () => {
                   htmlFor="inputEmail"
                   className="email-label mr-6 text-white"
                 >
-                  Email
+                  Email *
                 </label>
                 <input
                   type="email"
@@ -141,7 +141,7 @@ export const Register = () => {
                   htmlFor="inputPassword"
                   className="email-label mr-6 text-white"
                 >
-                  Password
+                  Password *
                 </label>
                 <input
                   type="password"
@@ -157,7 +157,7 @@ export const Register = () => {
                   htmlFor="inputVerifyPassword"
                   className="email-label mr-6 text-white"
                 >
-                  Verify Password
+                  Verify Password *
                 </label>
                 <input
                   type="password"
@@ -173,7 +173,7 @@ export const Register = () => {
                   htmlFor="inputNickname"
                   className="email-label mr-6 text-white"
                 >
-                  Nickname
+                  Nickname *
                 </label>
                 <input
                   type="nickname"
@@ -189,7 +189,7 @@ export const Register = () => {
                   htmlFor="inputCoven"
                   className="email-label mr-6 text-white"
                 >
-                  Coven
+                  Coven *
                 </label>
                 <input
                   type="coven"
