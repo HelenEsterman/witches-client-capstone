@@ -33,7 +33,7 @@ export const SpellDetails = ({ setShowNavbar }) => {
             />
             <div className="spell-page flex justify-between relative z-10 text-white">
               <div className="spell-detail-side w-1/2 pr-4 mt-12">
-                <h1 className="text-emerald-500 black-text-outline text-7xl mb-4 ml-24">
+                <h1 className="text-emerald-500 black-text-outline text-7xl mb-4 ml-28 mt-6">
                   {spell.name}
                 </h1>
                 <div className="intention flex text-4xl text-emerald-500 black-text-outline p-4">
@@ -81,7 +81,7 @@ export const SpellDetails = ({ setShowNavbar }) => {
                   </ul>
                 </div>
                 <div>
-                  <div className="additional_info flex text-4xl text-emerald-500 black-text-outline p-4">
+                  <div className="additional_info flex text-4xl text-emerald-500 black-text-outline p-4 -mb-24">
                     <div className="ml-32 mr-4 whitespace-nowrap underline">
                       additional info:
                     </div>
@@ -89,26 +89,28 @@ export const SpellDetails = ({ setShowNavbar }) => {
                   </div>
                 </div>
               </div>
-              <div className="w-1/2 mt-12 mr-12">
+              <div className="w-1/2 mt-12 mr-10">
                 <div className="mb-10">
-                  <h1 className="ingredient_list_header text-emerald-500 black-text-outline text-7xl mb-4">
+                  <h1 className="ingredient_list_header text-emerald-500 black-text-outline text-7xl mb-4 text-center">
                     Ingredients
                   </h1>
-                  <div className="ingredient_message text-indigo-400 text-4xl font-semibold black-text-outline">{`(ingredients not in your inventory will appear purple)`}</div>
-                  {spell?.spells_ingredients?.map((ingredient) => {
-                    return (
-                      <li
-                        className={`ingredient_list_item text-4xl text-emerald-500 black-text-outline ${
-                          ingredient.is_owned
-                            ? ""
-                            : "text-indigo-500 text-4xl black-text-outline"
-                        }`}
-                        key={`ingredient-${ingredient.ingredient.id}`}
-                      >
-                        {ingredient.measurement} {ingredient.ingredient.label}
-                      </li>
-                    );
-                  })}
+                  <div className="ingredient_message text-indigo-400 text-4xl font-semibold black-text-outline text-center mb-3">{`(ingredients not in your inventory will appear purple)`}</div>
+                  <div className="text-wrap ml-12" style={{ width: "600px" }}>
+                    {spell?.spells_ingredients?.map((ingredient) => {
+                      return (
+                        <li
+                          className={`ingredient_list_item text-4xl text-emerald-500 black-text-outline ${
+                            ingredient.is_owned
+                              ? ""
+                              : "text-indigo-500 text-4xl black-text-outline "
+                          }`}
+                          key={`ingredient-${ingredient.ingredient.id}`}
+                        >
+                          {ingredient.measurement} {ingredient.ingredient.label}
+                        </li>
+                      );
+                    })}
+                  </div>
                 </div>
                 <div>
                   <h1 className="equipment_list_header text-emerald-500 black-text-outline text-7xl mb-4">
