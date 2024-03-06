@@ -30,6 +30,7 @@ export const MyIngredients = ({ setShowNavbar }) => {
   const editIngredientModal = useRef();
   const deleteConfirmationModal = useRef();
 
+  // setting state for each defined variable above with fetch call data values
   useEffect(() => {
     getCurrentUserIngredients().then((ingredientArr) => {
       setMyIngredients(ingredientArr);

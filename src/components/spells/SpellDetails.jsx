@@ -13,6 +13,7 @@ export const SpellDetails = ({ setShowNavbar }) => {
     getSpellById(spellId).then((spellObj) => {
       setSpell(spellObj);
     });
+    // allows loading page to be seen for a couple seconds while data renders
     setTimeout(() => {
       setLoading(false);
     }, 1000);
